@@ -19,10 +19,10 @@ export const getPopulerDayMoviesAsync = createAsyncThunk(
   }
 );
 export const getSearchMoviesAsync = createAsyncThunk(
-  "searchmovies/getPopulerMoviesAsync",
+  "searchmovies/getSearchMoviesAsync",
   async (data) => {
     const res = await axios(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${data}&page=1`);
-    console.log(res)
+    console.log(data)
     return await res.data;
   }
 );
@@ -30,7 +30,7 @@ export const getDetailMoviesAsync = createAsyncThunk(
   "detailmovies/getDetailMoviesAsync",
   async (data) => {
     const res = await axios(`https://api.themoviedb.org/3/movie/${data}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
-    console.log(res)
+    console.log(data)
     return await res.data;
   }
 );

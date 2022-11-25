@@ -5,12 +5,16 @@ export const searchSlice = createSlice({
     name:'searchmovies',
     initialState:{
         items:[],
-        isLoading:false,
+        isLoading:true,
         error:null,
         pending:false,
 
     },
-    reducers:{},
+    reducers:{
+        changePending: (state) =>{
+            state.pending = false
+        }
+    },
     extraReducers: (builder) =>{
         builder
         .addCase(getSearchMoviesAsync.pending,(state,action)=>{
@@ -19,7 +23,7 @@ export const searchSlice = createSlice({
 
         })
         .addCase(getSearchMoviesAsync.fulfilled,(state,action)=>{
-            state.items=action.payload;
+            state.items = action.payload;
             state.isLoading=false;
         })
         .addCase(getSearchMoviesAsync.rejected,(state,action)=>{
@@ -29,5 +33,7 @@ export const searchSlice = createSlice({
 
     }
 })
+
+export const {changePending} = searchSlice.actions
 
 export default searchSlice.reducer;

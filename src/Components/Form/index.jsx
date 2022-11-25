@@ -1,16 +1,21 @@
 import { Box, Container, Flex, Img } from '@chakra-ui/react'
 import { SearchIcon } from '@chakra-ui/icons'
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import style from './style.module.css'
 import logo from '../../Images/logo.png'
+import { useSelector,useDispatch } from 'react-redux';
+import {getSearchMoviesAsync} from '../../Redux/services'
 
 const Form = () => {
+  const dispatch = useDispatch()
   const [movie,setMovie] = useState("");
 
-  const handleSubmit = (e)=>{
-    e.preventDefault();
-    console.log(movie)
-  }
+
+  // const handleSubmit = (e)=>{
+  //   e.preventDefault();
+  //   console.log(movie)
+  // dispatch(getSearchMoviesAsync(movie));
+  // }
   return (
     <>
       <Container  maxW="5xl">
@@ -19,12 +24,12 @@ const Form = () => {
             <Img src={logo}/>
           </Box>
        <Box mt="10">
-       <form onSubmit={handleSubmit} >
+       <Box>
           <Flex className={style.input} justifyContent="center">
           <input name='movie' value={movie} onChange={(e)=>setMovie(e.target.value)}  type="text" />
-          <button type='submit'><SearchIcon/></button>
+          <button onClick={()=>dispatch(getSearchMoviesAsync(movie))}><SearchIcon/></button>
           </Flex>
-        </form>
+        </Box>
        </Box>
         </Flex>
       </Container>
