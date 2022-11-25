@@ -1,8 +1,8 @@
 import {useEffect} from 'react'
-import { Box, Container, Divider, Grid, GridItem, Text,useMediaQuery,Spinner } from '@chakra-ui/react'
+import { Box, Container, Divider, Grid, GridItem, Text,useMediaQuery,Spinner,Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 
 import { useSelector,useDispatch } from 'react-redux';
-import {getPopulerMoviesAsync} from '../../Redux/services'
+import {getPopulerDayMoviesAsync, getPopulerWeekMoviesAsync} from '../../Redux/services'
 import SingleMovie from '../SingleMovie';
 
 
@@ -11,19 +11,23 @@ const Movies = () => {
     const [isLargerThan900] = useMediaQuery('(min-width: 900px)')
     const [isLargerThan768] = useMediaQuery('(min-width: 768px)')
     const dispatch = useDispatch()
-    const results = useSelector(state =>state.popmovies.items)
-    const isLoading = useSelector(state =>state.popmovies.isLoading)
-    const error = useSelector(state =>state.popmovies.error)
+    const weekResults = useSelector(state =>state.popmovies.week.items)
+    const weekIsLoading = useSelector(state =>state.popmovies.week.isLoading)
+    const weekError = useSelector(state =>state.popmovies.week.error)
+    const dayResults = useSelector(state =>state.popmovies.day.items)
+    const dayIsLoading = useSelector(state =>state.popmovies.day.isLoading)
+    const dayError = useSelector(state =>state.popmovies.day.error)
     useEffect(()=>{
-        dispatch(getPopulerMoviesAsync());
+        dispatch(getPopulerWeekMoviesAsync());
+        dispatch(getPopulerDayMoviesAsync());
     },[dispatch])
 
-    console.log(isLoading)
-    console.log(results.results)
+    console.log(weekIsLoading)
+    console.log(weekResults.results)
     
   
     
-    if(isLoading){
+    if(weekIsLoading){
 
         return(
 
@@ -40,7 +44,7 @@ const Movies = () => {
 
         )
     }
-    if(error){
+    if(weekError){
         return(
             <>Error!!</>
         )
@@ -53,19 +57,51 @@ const Movies = () => {
                 <Text fontSize="25px" fontWeight="500">Popular Movies</Text>
             </Box>
             <Divider mb="5"/>
-<Grid templateColumns={isLargerThan1280 ? 'repeat(4, 1fr)' : isLargerThan900 ? 'repeat(3, 1fr)' : isLargerThan768 ? 'repeat(3, 1fr)' : 'repeat(2, 1fr)'  } gap={3}>
+            <Tabs variant='enclosed'>
+  <TabList>
+    <Tab>Popular Today</Tab>
+    <Tab>Popular This Week</Tab>
+  </TabList>
+
+
+
+
+  <TabPanels>
+    <TabPanel>
+    <Grid templateColumns={isLargerThan1280 ? 'repeat(4, 1fr)' : isLargerThan900 ? 'repeat(3, 1fr)' : isLargerThan768 ? 'repeat(3, 1fr)' : 'repeat(2, 1fr)'  } gap={3}>
   {/* <GridItem w='100%' h='10' bg='blue.500' />
   <GridItem w='100%' h='10' bg='blue.500' />
   <GridItem w='100%' h='10' bg='blue.500' />
   <GridItem w='100%' h='10' bg='blue.500' /> */}
   {
-   results.results.map((result) =>(
+   dayResults.results.map((result) =>(
         <SingleMovie key={result.id} result={result}/>
     ))
   }
   
 </Grid>
+    </TabPanel>
+    <TabPanel>
+    <Grid templateColumns={isLargerThan1280 ? 'repeat(4, 1fr)' : isLargerThan900 ? 'repeat(3, 1fr)' : isLargerThan768 ? 'repeat(3, 1fr)' : 'repeat(2, 1fr)'  } gap={3}>
+  {/* <GridItem w='100%' h='10' bg='blue.500' />
+  <GridItem w='100%' h='10' bg='blue.500' />
+  <GridItem w='100%' h='10' bg='blue.500' />
+  <GridItem w='100%' h='10' bg='blue.500' /> */}
+  {
+   weekResults.results.map((result) =>(
+        <SingleMovie key={result.id} result={result}/>
+    ))
+  }
+  
+</Grid>
+    </TabPanel>
+  </TabPanels>
+</Tabs>
+
         </Container>
+
+       
+
     </>
   )
 }

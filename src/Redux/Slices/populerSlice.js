@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import { getPopulerMoviesAsync} from '../services';
+import { getPopulerWeekMoviesAsync,getPopulerDayMoviesAsync} from '../services';
 
 export const searchSlice = createSlice({
     name:'popmovies',
@@ -8,23 +8,48 @@ export const searchSlice = createSlice({
         isLoading:true,
         error:null,
         pending:false,
+        day:{
+            items:[],
+            isLoading:true,
+            error:null,
+            pending:false,
+        },
+        week:{
+            items:[],
+            isLoading:true,
+            error:null,
+            pending:false,
+        }
 
     },
     reducers:{},
     extraReducers: (builder) =>{
         builder
-        .addCase(getPopulerMoviesAsync.pending,(state,action)=>{
-            state.isLoading=true;
-            state.pending=true;
+        .addCase(getPopulerWeekMoviesAsync.pending,(state,action)=>{
+            state.week.isLoading=true;
+            state.week.pending=true;
 
         })
-        .addCase(getPopulerMoviesAsync.fulfilled,(state,action)=>{
-            state.items=action.payload;
-            state.isLoading=false;
+        .addCase(getPopulerWeekMoviesAsync.fulfilled,(state,action)=>{
+            state.week.items=action.payload;
+            state.week.isLoading=false;
         })
-        .addCase(getPopulerMoviesAsync.rejected,(state,action)=>{
-            state.isLoading = false;
-            state.error = action.error.message;
+        .addCase(getPopulerWeekMoviesAsync.rejected,(state,action)=>{
+            state.week.isLoading = false;
+            state.week.error = action.error.message;
+        })
+        .addCase(getPopulerDayMoviesAsync.pending,(state,action)=>{
+            state.day.isLoading=true;
+            state.day.pending=true;
+
+        })
+        .addCase(getPopulerDayMoviesAsync.fulfilled,(state,action)=>{
+            state.day.items=action.payload;
+            state.day.isLoading=false;
+        })
+        .addCase(getPopulerDayMoviesAsync.rejected,(state,action)=>{
+            state.day.isLoading = false;
+            state.day.error = action.error.message;
         })
 
 
