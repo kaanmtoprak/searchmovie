@@ -1,5 +1,6 @@
 import { Box, Flex,Img, Text,Badge, Button } from '@chakra-ui/react'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 
 const SingleMovie = ({result}) => {
@@ -17,7 +18,7 @@ const SingleMovie = ({result}) => {
                 <Badge colorScheme={result.vote_average >= 7 ? "green" : result.vote_average >= 5.5 ? "yellow" : "red" }>10 / {result.vote_average}</Badge>
                
             </Box>
-            <Button>More Detail</Button>
+            <Link to={`/movie/detail/${result.id}`}><Button w="100%">More Details</Button></Link>
 
         </Flex>
 

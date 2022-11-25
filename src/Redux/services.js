@@ -26,5 +26,16 @@ export const getSearchMoviesAsync = createAsyncThunk(
     return await res.data;
   }
 );
+export const getDetailMoviesAsync = createAsyncThunk(
+  "detailmovies/getDetailMoviesAsync",
+  async (data) => {
+    const res = await axios(`https://api.themoviedb.org/3/movie/${data}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
+    console.log(res)
+    return await res.data;
+  }
+);
+
+
+// https://api.themoviedb.org/3/movie/${data}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US
 
 

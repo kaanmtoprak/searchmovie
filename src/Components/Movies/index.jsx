@@ -27,28 +27,8 @@ const Movies = () => {
     
   
     
-    if(weekIsLoading){
-
-        return(
-
-    <Container  maxW="7xl" mt={10}>
-            <Spinner
-  thickness='4px'
-  speed='0.65s'
-  emptyColor='gray.200'
-  color='blue.500'
-  size='xl'
-/>
-    </Container>
 
 
-        )
-    }
-    if(weekError){
-        return(
-            <>Error!!</>
-        )
-    }
 
   return (
     <>
@@ -73,10 +53,18 @@ const Movies = () => {
   <GridItem w='100%' h='10' bg='blue.500' />
   <GridItem w='100%' h='10' bg='blue.500' />
   <GridItem w='100%' h='10' bg='blue.500' /> */}
-  {
-   dayResults.results.map((result) =>(
+{
+   !dayIsLoading ? dayResults.results.map((result) =>(
         <SingleMovie key={result.id} result={result}/>
-    ))
+    )) :  dayIsLoading ?   <Container  maxW="7xl" mt={10}>
+    <Spinner
+thickness='4px'
+speed='0.65s'
+emptyColor='gray.200'
+color='blue.500'
+size='xl'
+/>
+</Container> : dayError && <>Error</>
   }
   
 </Grid>
@@ -88,9 +76,17 @@ const Movies = () => {
   <GridItem w='100%' h='10' bg='blue.500' />
   <GridItem w='100%' h='10' bg='blue.500' /> */}
   {
-   weekResults.results.map((result) =>(
+   !weekIsLoading ? weekResults.results.map((result) =>(
         <SingleMovie key={result.id} result={result}/>
-    ))
+    )) :  weekIsLoading ?   <Container  maxW="7xl" mt={10}>
+    <Spinner
+thickness='4px'
+speed='0.65s'
+emptyColor='gray.200'
+color='blue.500'
+size='xl'
+/>
+</Container> : weekError && <>Error</>
   }
   
 </Grid>

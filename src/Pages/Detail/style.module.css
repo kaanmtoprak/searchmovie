@@ -1,0 +1,12 @@
+.flex{
+    width: 100%;
+    height: 500px;
+}
+.backdrop{
+    position:absolute;
+    filter:brightness(0.2);
+    z-index: -1;
+}
+.box{
+    width: 400px;
+}
