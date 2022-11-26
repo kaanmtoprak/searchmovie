@@ -2,11 +2,14 @@
     border: 1px solid #e2e2e2;
     padding: 10px;
     border-radius: 15px;
+    max-width: 600px;
+    margin: 0 auto;
 }
 .input input{ 
-    min-width: 400px;
+    
     width: 100%;
 }
 .input input:focus{ 
     outline: none;
 }
+

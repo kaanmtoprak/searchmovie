@@ -24,7 +24,7 @@ const Form = () => {
           <Box mt="10">
             <Img src={logo} />
           </Box>
-          <Box mt="10">
+          <Box w="100%" mt="10">
             <form onSubmit={handleSubmit}>
               <Flex className={style.input} justifyContent="center">
                 <input
