@@ -34,7 +34,7 @@ const Detail = () => {
 
   return (
     <Flex bg="black" zIndex="-2" position="absolute" width="100%" minH="100vh">
-      <img className={style.backdrop} src={image_url} alt="" />
+      <img width="100%" className={style.backdrop} src={image_url} alt="" />
 
       <Container mt="10" maxW="8xl">
         <Grid

@@ -19,10 +19,7 @@ const Header = () => {
         </Box>
         <Flex fontSize="20px" color="white" mr="5">
           <Text>
-            <Link to="/">About</Link>
-          </Text>
-          <Text ml="5">
-            <Link to="/">Contact</Link>
+            <a href="https://github.com/kaanmtoprak" rel="noreferrer" target="_blank">Follow Me!</a>
           </Text>
         </Flex>
       </Flex>

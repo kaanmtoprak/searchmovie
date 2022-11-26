@@ -2,6 +2,8 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import Detail from './Pages/Detail';
 import Home from './Pages/Home';
 import Header from './Components/Header'
+import NotFound from './Pages/404';
+
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
 
         <Route path='/' element={<Home/>}/>
         <Route path='/movie/detail/:id' element={<Detail/>}/>
+
+        <Route path='*' element={<NotFound/>}/>
 
 
       </Routes>
